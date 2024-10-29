@@ -48,46 +48,42 @@ const Dashboard = () => {
     }
   };
 
-  return (
-    <div>
-      {loading ? (
-        <div className="container-fluid vh-100 bg-dark"></div>
-      ) : (
-        <>
-          <NavBar />
-          <div className="container">
-            <div className="row">
-              <div className="col-12 mt-3">
-                <h1>
-                  Halloo <span className="h3">{name}</span>
-                </h1>
-                <p>Selamat datang kembali</p>
-                <h4>Daftar user</h4>
-                <table className="table table-striped mt-3">
-                  <thead className="table-dark">
-                    <tr>
-                      <th>No</th>
-                      <th>Name</th>
-                      <th>Email</th>
+  if (!loading) {
+    return (
+      <div>
+        <NavBar />
+        <div className="container">
+          <div className="row">
+            <div className="col-12 mt-3">
+              <h1>
+                Halloo <span className="h3">{name}</span>
+              </h1>
+              <p>Selamat datang kembali</p>
+              <h4>Daftar user</h4>
+              <table className="table table-striped mt-3">
+                <thead className="table-dark">
+                  <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {user.map((e, index) => (
+                    <tr key={e.id}>
+                      <td>{index + 1}.</td>
+                      <td>{e.name}</td>
+                      <td>{e.email}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {user.map((e, index) => (
-                      <tr key={e.id}>
-                        <td>{index + 1}.</td>
-                        <td>{e.name}</td>
-                        <td>{e.email}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        </>
-      )}
-    </div>
-  );
+        </div>
+      </div>
+    );
+  }
 };
 
 export default Dashboard;

@@ -12,11 +12,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(false);
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   // action
 
   const submitLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.post("http://localhost:5000/api/login", {
         email,
         password,
@@ -31,6 +33,8 @@ const Login = () => {
       setTimeout(() => {
         setErr(false);
       }, 3000);
+    } finally {
+      setLoading(false);
     }
   };
   // component
@@ -57,7 +61,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button className="btn btn-success mt-4" type="submit">
-                Login
+                {loading ? "Loading..." : "Login"}
               </button>
             </form>
             <p className="m-0 mt-2">
